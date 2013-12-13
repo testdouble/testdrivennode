@@ -1,0 +1,17 @@
+{
+  "name": "Battleship",
+  "description": "Node Battleship App",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "test": "./node_modules/jasmine-node/bin/jasmine-node test"
+  },
+  "dependencies": {
+    "express": "3.x"
+  },
+  "devDependencies": {
+    "jasmine-node": "*",
+    "testem": "*",
+    "grunt": "*"
+  }
+}
