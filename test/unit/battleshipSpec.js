@@ -1,44 +1,4 @@
-"use strict";
-
-var Battleship = function() {
-
-  this.grid = createGrid(3,3);
-
-  this.place3SpotShip = function(x, y, orientation) {
-    this.grid[x][y] = 'ship';
-    if (orientation == 'horizontal') {
-      this.grid[x+1][y] = 'ship';
-      this.grid[x+2][y] = 'ship';
-    }
-    else {
-      this.grid[x][y+1] = 'ship';
-      this.grid[x][y+2] = 'ship';
-    }
-    return this;
-  }
-
-  function createGrid(rows, columns) {
-    var grid = [];
-    for(var i=0; i<columns; i++) {
-      grid[i] = [];
-      for(var j=0; j<rows; j++) {
-        grid[i][j] = 'empty';
-      }
-    }
-    return grid;
-  }
-
-} 
-
-// Constraints
-// Single ship
-// 3x3 grid
-// ship length of 3
-
-
-// Container is Battleship
-// Tests around placing off the board
-
+var Battleship = require('../../lib/battleship'); 
 
 describe("battleship", function() {
   describe("initialization" , function() {
@@ -78,8 +38,7 @@ describe("battleship", function() {
       expect(grid[2][0]).toBe("ship");
     });
 
-    // Exercise for the reader
-    // No placement off the board
+    // TODO: No placement off the board
   });
 
 });
