@@ -1,4 +1,4 @@
-var Battleship = require('../../lib/battleship'); 
+var Battleship = require('../../lib/battleship');
 
 describe("battleship", function() {
   describe("initialization" , function() {
@@ -18,7 +18,7 @@ describe("battleship", function() {
   describe("place3SpotShip", function() {
     var x = 0;
     var y = 0;
-    var orientation = 'horizontal'; 
+    var orientation = 'horizontal';
     var battleship = new Battleship();
 
     it("allows you to place a ship", function() {
