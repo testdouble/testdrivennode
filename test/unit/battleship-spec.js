@@ -1,9 +1,11 @@
 var Battleship = require('../../lib/battleship');
 
 describe("battleship", function() {
+  var battleship;
+  beforeEach(function(){
+    battleship = new Battleship();
+  });
   describe("initialization" , function() {
-    var battleship = new Battleship();
-
     it("exists", function() {
       expect(battleship).not.toBe(undefined);
     });
@@ -19,7 +21,6 @@ describe("battleship", function() {
     var x = 0;
     var y = 0;
     var orientation = 'horizontal';
-    var battleship = new Battleship();
 
     it("allows you to place a ship", function() {
       expect(battleship.place3SpotShip.bind(null, x, y, orientation)).not.toThrow(Error);
