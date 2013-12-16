@@ -5,11 +5,8 @@ describe("battleship", function() {
   beforeEach(function(){
     battleship = new Battleship();
   });
-  describe("initialization" , function() {
-    it("exists", function() {
-      expect(battleship).not.toBe(undefined);
-    });
 
+  describe("initialization" , function() {
     it("has a blank 3x3 grid", function() {
       expect(battleship.grid[0][0]).toBe("empty");
       expect(battleship.grid[2][2]).toBe("empty");
@@ -21,10 +18,6 @@ describe("battleship", function() {
     var x = 0;
     var y = 0;
     var orientation = 'horizontal';
-
-    it("allows you to place a ship", function() {
-      expect(battleship.place3SpotShip.bind(null, x, y, orientation)).not.toThrow(Error);
-    });
 
     it("returns the battleship", function () {
       var result = battleship.place3SpotShip(x, y, orientation);
