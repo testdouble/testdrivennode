@@ -15,21 +15,20 @@ describe("battleship", function() {
   });
 
   describe("place3SpotShip", function() {
-    var x = 0;
-    var y = 0;
-    var orientation = 'horizontal';
+    var result, x = 0, y = 0, orientation = 'horizontal';
 
-    it("returns the battleship", function () {
-      var result = battleship.place3SpotShip(x, y, orientation);
+    beforeEach(function(){
+      result = battleship.place3SpotShip(x, y, orientation);
+    });
+
+    it("is chainable (e.g. returns the battleship)", function () {
       expect(result).toBe(battleship);
     });
 
     it("marks the grid", function() {
-      var result = battleship.place3SpotShip(0,0, "horizontal");
-      var grid = battleship.grid;
-      expect(grid[0][0]).toBe("ship");
-      expect(grid[1][0]).toBe("ship");
-      expect(grid[2][0]).toBe("ship");
+      expect(battleship.grid[0][0]).toBe("ship");
+      expect(battleship.grid[1][0]).toBe("ship");
+      expect(battleship.grid[2][0]).toBe("ship");
     });
 
     // TODO: No placement off the board
