@@ -2,18 +2,16 @@
 var inProgress = {
   status: 'inprogress',
   turn: "yours",
-  boards: {
-    yours: [
-      ["hit", "ship", "ship"],
-      ["empty", "miss", "empty"],
-      ["empty", "empty", "empty"]
-    ],
-    opponents: [
-      ["empty", "hit", "empty"],
-      ["empty", "hit", "empty"],
-      ["empty", "empty", "miss"]
-    ]
-  }
+  primaryGrid: [
+    [{state:"hit", ship: "ship"}, {state:"none", ship:"ship"}, {state:"none", ship:"ship"}],
+    [{state:"none"}, {state:"miss"}, {state:"none"}], 
+    [{state:"none"}, {state:"none"}, {state:"none"}]
+  ],
+  trackingGrid: [
+    [{state:"none"}, {state:"hit"}, {state:"none"}],
+    [{state:"none"}, {state:"hit"}, {state:"miss"}], 
+    [{state:"none"}, {state:"none"}, {state:"none"}]
+  ]
 };
 var notStarted = {
   status: 'setup'
