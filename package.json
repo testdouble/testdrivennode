@@ -14,6 +14,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-jasmine-bundle": "~0.1.4"
+    "grunt-jasmine-bundle": "~0.1.4",
+    "frisby": "~0.7.5"
   }
 }
