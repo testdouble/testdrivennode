@@ -1,7 +1,7 @@
-Battleship = require("../../lib/battleship")
+Board = require("../../lib/board")
 
-describe "Battleship", ->
-  Given -> @subject = new Battleship()
+describe "Board", ->
+  Given -> @subject = new Board()
 
   describe "initial state", ->
     Then -> @subject.grid[0][0] == "empty"
