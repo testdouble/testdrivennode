@@ -14,7 +14,8 @@ var inProgress = {
   ]
 };
 var notStarted = {
-  status: 'setup'
+  status: 'setup',
+  id: 2,
 };
 
 var games = [inProgress, notStarted];
@@ -25,4 +26,8 @@ exports.list = function(req, res){
 exports.loadById = function(req, res, next){
   var id = req.params.id;
   res.send(games[id] || games[0]);
+};
+
+exports.create = function(req, res, next){
+  res.send(games[1]);
 };

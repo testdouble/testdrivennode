@@ -8,6 +8,6 @@ module.exports = (grunt) ->
       unit:
         options:
           helpers: "test/unit/helpers/**/*.{js,coffee}"
-          specs: "test/unit/**/*.{js,coffee}"
+          specs: "test/**/**/*.{js,coffee}"
           minijasminenode:
             showColors: true
