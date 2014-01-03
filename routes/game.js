@@ -13,10 +13,17 @@ var inProgress = {
     [{state:"none"}, {state:"none"}, {state:"none"}]
   ]
 };
+
 var notStarted = {
   status: 'setup',
   id: 2,
 };
+
+var emptyGrid = [
+  [{state:"none"}, {state:"none"}, {state:"none"}],
+  [{state:"none"}, {state:"none"}, {state:"hit"}],
+  [{state:"none"}, {state:"none"}, {state:"none"}]
+];
 
 var games = [inProgress, notStarted];
 exports.list = function(req, res){
@@ -33,5 +40,10 @@ exports.create = function(req, res, next){
 };
 
 exports.update = function(req, res, next){
+  games.filter(function(e) { return e.id === parseInt(req.params.id); });
+  games[1].primaryGrid = req.params.primaryGrid;
+  games[1].trackingGrid = emptyGrid;
+  games[1].status = "inprogress";
+  games[1].turn = "yours";
   res.send(games[1]);
 };
