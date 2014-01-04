@@ -50,7 +50,7 @@ describe("Board", function() {
       expect(board.grid[0][0]).toBe("hit");
     });
 
-    it("mutates the state of the board on hits", function() {
+    it("mutates the state of the board on misses", function() {
       expect(board.grid[2][2]).toBe("empty");
       board.shoot(2,2);
       expect(board.grid[2][2]).toBe("miss");
