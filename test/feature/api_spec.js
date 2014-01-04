@@ -4,10 +4,10 @@ var root = "http://localhost:3000";
 var gamesURI = root + "/games";
 var gameId;
 var fakeGrid = [
-  [{state:"none", ship: "ship"}, {state:"none", ship:"ship"}, {state:"none", ship:"ship"}],
-  [{state:"none"}, {state:"miss"}, {state:"none"}],
+  [{state:"none", ship: "ship"}, {state:"none", ship:"ship"}, {state:"none"}],
+  [{state:"none"}, {state:"none"}, {state:"none"}],
   [{state:"none"}, {state:"none"}, {state:"none"}]
-]
+];
 
 function gameURI() {
   if (gameId) {
@@ -43,21 +43,44 @@ function updateGame() {
       .expectHeaderContains('content-type', 'application/json')
       .expectJSON({
         status: "inprogress",
-        turn: "yours",
-        trackingGrid: function(grid) { expect(grid.length).toBe(3) }
+        turn: "yours"
+      })
+      // .inspectJSON()
+      .expectJSONTypes({
+        status: String,
+        turn: String,
+        id: Number,
+        trackingGrid: Array,
+        primaryGrid: Array
       })
       .afterJSON(function(data) {
-        getGame()
+        expect(data.trackingGrid.length).toBe(3);
+        data.trackingGrid.forEach(function(row) {
+          expect(row.length).toBe(3);
+          expect(row).toContain({ state: 'none' });
+          expect(row).not.toContain({ state: 'hit' });
+          expect(row).not.toContain({ state: 'miss' });
+        });
+        expect(data.primaryGrid).toEqual(fakeGrid);
+        getGameStateDuringPlay()
       })
   .toss();
 }
 
-function getGame() {
+function getGameStateDuringPlay() {
   frisby.create('Poll for game state via GET /games/:id')
     .get(gameURI())
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
+      .inspectJSON()
       .expectJSON({})
+      .expectJSONTypes({
+        status: String,
+        turn: String,
+        id: Number,
+        trackingGrid: Array,
+        primaryGrid: Array
+      })
       .after(function(data) {
         // postShot()
       })

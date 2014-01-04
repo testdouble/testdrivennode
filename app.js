@@ -32,7 +32,7 @@ app.get('/', routes.index);
 app.get('/games', game.list);
 app.post('/games', game.create);
 app.put('/games/:id', game.update);
-app.get('/games/:id', game.loadById);
+app.get('/games/:id', game.show);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
