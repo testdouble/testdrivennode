@@ -1,4 +1,3 @@
-var url = require('url');
 var frisby = require('frisby');
 var root = "http://localhost:3000";
 var gamesURI = root + "/games";
@@ -72,7 +71,7 @@ function getGameStateDuringPlay() {
     .get(gameURI())
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
-      .inspectJSON()
+      // .inspectJSON()
       .expectJSON({})
       .expectJSONTypes({
         status: String,
@@ -82,18 +81,26 @@ function getGameStateDuringPlay() {
         primaryGrid: Array
       })
       .after(function(data) {
-        // postShot()
+        postShot()
       })
   .toss();
 }
 
 function postShot() {
   frisby.create('Fire a shot via POST /games/:id/shots')
-    .post(gameURI() + '/shots')
+    .post(gameURI() + '/shots', { x: 0, y: 1 }, { json: true })
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
-      .expectJSON({})
-      .after(function(data) {
+      // .inspectJSON()
+      .expectJSON({ x: 0, y: 1 })
+      .expectJSONTypes({
+        x: Number,
+        y: Number,
+        hit: Boolean,
+        sunk: String
+      })
+      .afterJSON(function(data) {
+        expect(data.sunk).toMatch(/none sunk|carrier|battleship|destroyer|patrol boat/);
       })
   .toss();
 }
