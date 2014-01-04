@@ -15,9 +15,11 @@ var inProgress = {
   ]
 };
 
-var notStarted = {
-  id: 2,
-  status: 'setup'
+var createGame = function(){
+  return {
+    id: 2,
+    status: 'setup'
+  }
 };
 
 var emptyGrid = [
@@ -26,7 +28,7 @@ var emptyGrid = [
   [{state:"none"}, {state:"none"}, {state:"none"}]
 ];
 
-var games = [inProgress, notStarted];
+var games = [inProgress, createGame()];
 
 function findGame(id) {
   return games.filter(function (game) {
@@ -48,7 +50,7 @@ exports.show = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  res.send(games[1]);
+  res.send(createGame());
 };
 
 exports.update = function(req, res, next){

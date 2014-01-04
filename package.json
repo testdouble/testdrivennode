@@ -11,6 +11,7 @@
     "express": "3.4.7",
     "jade": "*",
     "coffee-script": "~1.6.3",
+    "underscore": "~1.5.2",
     "q": "0.9.7"
   },
   "devDependencies": {

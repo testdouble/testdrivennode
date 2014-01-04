@@ -1,4 +1,5 @@
 var frisby = require('frisby');
+//TODO: Create test server.
 var root = "http://localhost:3000";
 var gamesURI = root + "/games";
 var gameId;
@@ -104,5 +105,10 @@ function postShot() {
       })
   .toss();
 }
+
+frisby.create('The dev server must be running')
+  .get(root)
+    .expectStatus(200)
+.toss();
 
 createGame();
