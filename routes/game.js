@@ -31,3 +31,7 @@ exports.loadById = function(req, res, next){
 exports.create = function(req, res, next){
   res.send(games[1]);
 };
+
+exports.update = function(req, res, next){
+  res.send(games[1]);
+};
