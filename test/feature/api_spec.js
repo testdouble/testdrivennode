@@ -10,49 +10,72 @@ var fakeGrid = [
 ]
 
 function gameURI() {
-  return gamesURI + "/" + gameId;
+  if (gameId) {
+    return gamesURI + "/" + gameId;
+  } else {
+    throw "game id not set.";
+  }
 }
 
-frisby.create('Game starts when a user POSTs a new game')
-  .post(gamesURI)
-    .expectStatus(200)
-    .expectHeaderContains('content-type', 'application/json')
-    // .inspectJSON()
-    .expectJSON({ status: "setup", })
-    .expectJSONTypes({ id: Number })
-    .afterJSON(function(data) {
-      gameId = data.id;
-    })
-.toss();
+function createGame() {
+  console.log("create game start")
+  frisby.create('Game starts when a user POSTs a new game')
+    .post(gamesURI)
+      .expectStatus(200)
+      .expectHeaderContains('content-type', 'application/json')
+      // .inspectJSON()
+      .expectJSON({ status: "setup", })
+      .expectJSONTypes({ id: Number })
+      .afterJSON(function(data) {
+        gameId = data.id;
+        updateGame()
+      })
+  .toss();
+}
 
-frisby.create('Setup ends when a user updates game with PUT')
-  .put(gameURI(), {
-    id: gameId,
-    status: "setup",
-    primaryGrid: fakeGrid
-  }, { json: true })
-    .expectStatus(200)
-    .expectHeaderContains('content-type', 'application/json')
-    .expectJSON({
-      status: "inprogress",
-      turn: "yours",
-      trackingGrid: function(grid) { expect(grid.length).toBe(3) }
-    })
-    .afterJSON(function(data) {
-      console.log(gameURI);
-    })
-.toss();
+function updateGame() {
+  console.log("update game start");
+  console.log(gameURI());
+  frisby.create('Setup ends when a user updates game with PUT')
+    .put(gameURI(), {
+      id: gameId,
+      status: "setup",
+      primaryGrid: fakeGrid
+    }, { json: true })
+      .expectStatus(200)
+      .expectHeaderContains('content-type', 'application/json')
+      .expectJSON({
+        status: "inprogress",
+        turn: "yours",
+        trackingGrid: function(grid) { expect(grid.length).toBe(3) }
+      })
+      .afterJSON(function(data) {
+        getGame()
+      })
+  .toss();
+}
 
-frisby.create('Poll for game state via GET /games/:id')
-  .get(gameURI())
-  .expectStatus(200)
-  .expectHeaderContains('content-type', 'application/json')
-  .expectJSON({})
-// .toss();
+function getGame() {
+  frisby.create('Poll for game state via GET /games/:id')
+    .get(gameURI())
+      .expectStatus(200)
+      .expectHeaderContains('content-type', 'application/json')
+      .expectJSON({})
+      .after(function(data) {
+        // postShot()
+      })
+  .toss();
+}
 
-frisby.create('Fire a shot via POST /games/:id/shots')
-  .post(gameURI() + '/shots')
-  .expectStatus(200)
-  .expectHeaderContains('content-type', 'application/json')
-  .expectJSON({})
-// .toss();
+function postShot() {
+  frisby.create('Fire a shot via POST /games/:id/shots')
+    .post(gameURI() + '/shots')
+      .expectStatus(200)
+      .expectHeaderContains('content-type', 'application/json')
+      .expectJSON({})
+      .after(function(data) {
+      })
+  .toss();
+}
+
+createGame();
