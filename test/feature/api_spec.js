@@ -18,7 +18,6 @@ function gameURI() {
 }
 
 function createGame() {
-  console.log("create game start")
   frisby.create('Game starts when a user POSTs a new game')
     .post(gamesURI)
       .expectStatus(200)
@@ -34,8 +33,6 @@ function createGame() {
 }
 
 function updateGame() {
-  console.log("update game start");
-  console.log(gameURI());
   frisby.create('Setup ends when a user updates game with PUT')
     .put(gameURI(), {
       id: gameId,
