@@ -5,7 +5,7 @@
 
 var express = require('express');
 var routes = require('./routes');
-var game = require('./routes/game');
+var games = require('./routes/games');
 var shots = require('./routes/shots');
 var http = require('http');
 var path = require('path');
@@ -30,10 +30,10 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/games', game.list);
-app.post('/games', game.create);
-app.put('/games/:id', game.update);
-app.get('/games/:id', game.show);
+app.get('/games', games.list);
+app.post('/games', games.create);
+app.put('/games/:id', games.update);
+app.get('/games/:id', games.show);
 
 app.post('/games/:id/shots', shots.create);
 
