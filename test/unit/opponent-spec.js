@@ -3,21 +3,17 @@ var Board = require('../../lib/board');
 
 describe("Opponent", function() {
   var opponent;
-  var board;
 
   beforeEach(function(){
-    board = new Board();
-    opponent = new Opponent(board);
-  });
-
-  it("has a board", function(){
-    expect(opponent.board).not.toBe(null);
+    opponent = new Opponent();
   });
 
   describe("placement", function() {
+    var board = new Board();
+
     it("places the ship in the upper left, horizontally", function() {
 
-      opponent.place3SpotShip();
+      opponent.place3SpotShip(board);
 
       expect(board.grid[0][0]).toBe("ship");
       expect(board.grid[1][0]).toBe("ship");
