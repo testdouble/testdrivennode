@@ -19,3 +19,36 @@
 * GET `/games/:id` `#show` - game state
 * PUT `/games/:id` `#update` - used once per game to place the ships
 * POST `/games/:gameId/shots` `#create` - this is how the user ends a turn
+
+
+## JSON Structure
+
+### Game
+
+```JavaScript
+{
+  status: ("setup" | "inprogress" | "won" | "lost"),
+  turn: ("yours" | "opponents"),
+  primaryGrid:
+      [
+        [{state:"none", ship: "ship"}, {state:"hit", ship:"ship"}, {state:"none", ship:"ship"}],
+        [{state:"miss"}, {state:"miss"}, {state:"miss"}],
+        [{state:"none"}, {state:"none"}, {state:"none"}]
+      ]
+  trackingGrid:
+      [
+...
+      ]
+}
+```
+
+### Shot
+
+```JavaScript
+{
+  x: 0,
+  y: 1,
+  hit: [true | false],
+  sunk: ["none sunk" | [shipType]]
+}
+```
