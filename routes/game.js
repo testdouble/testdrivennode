@@ -1,6 +1,6 @@
 // Fake it til you make it
 var inProgress = {
-  id: 1,
+  id: "1",
   status: 'inprogress',
   turn: "yours",
   primaryGrid: [
@@ -15,11 +15,16 @@ var inProgress = {
   ]
 };
 
+var games = [inProgress];
+
 var createGame = function(){
-  return {
-    id: 2,
+  var id = 1;
+  var g = {
+    id: (id++).toString(),
     status: 'setup'
-  }
+  };
+  games.push(g);
+  return g;
 };
 
 var emptyGrid = [
@@ -28,7 +33,6 @@ var emptyGrid = [
   [{state:"none"}, {state:"none"}, {state:"none"}]
 ];
 
-var games = [inProgress, createGame()];
 
 function findGame(id) {
   return games.filter(function (game) {
@@ -41,7 +45,7 @@ exports.list = function(req, res){
 };
 
 exports.show = function(req, res, next){
-  var game = findGame(parseInt(req.params.id));
+  var game = findGame(req.params.id);
   if (game) {
     res.send(game);
   } else {
@@ -54,7 +58,7 @@ exports.create = function(req, res, next){
 };
 
 exports.update = function(req, res, next){
-  var game = findGame(parseInt(req.params.id));
+  var game = findGame(req.params.id);
   if (game) {
     game.primaryGrid = req.body.primaryGrid;
     game.trackingGrid = emptyGrid;

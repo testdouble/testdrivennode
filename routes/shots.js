@@ -3,7 +3,6 @@ function findGame(gameId) {
 }
 
 exports.create = function(req, res, next){
-  console.log("hai");
   var game = findGame(parseInt(req.params.id));
 
   if (game) {

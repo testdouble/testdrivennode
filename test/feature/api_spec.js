@@ -23,8 +23,10 @@ function createGame() {
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
       // .inspectJSON()
-      .expectJSON({ status: "setup", })
-      .expectJSONTypes({ id: Number })
+      .expectJSON({
+        status: "setup",
+        id: function(val) { expect(val).toBeDefined() }
+      })
       .afterJSON(function(data) {
         gameId = data.id;
         updateGame()
@@ -43,13 +45,13 @@ function updateGame() {
       .expectHeaderContains('content-type', 'application/json')
       .expectJSON({
         status: "inprogress",
-        turn: "yours"
+        turn: "yours",
+        id: gameId
       })
       // .inspectJSON()
       .expectJSONTypes({
         status: String,
         turn: String,
-        id: Number,
         trackingGrid: Array,
         primaryGrid: Array
       })
@@ -73,11 +75,10 @@ function getGameStateDuringPlay() {
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
       // .inspectJSON()
-      .expectJSON({})
+      .expectJSON({ id: gameId })
       .expectJSONTypes({
         status: String,
         turn: String,
-        id: Number,
         trackingGrid: Array,
         primaryGrid: Array
       })
