@@ -8,8 +8,8 @@ describe("Board", function() {
 
   describe("initialization" , function() {
     it("has a blank 3x3 grid", function() {
-      expect(board.grid[0][0]).toBe("empty");
-      expect(board.grid[2][2]).toBe("empty");
+      expect(board.grid[0][0].state).toBe("none");
+      expect(board.grid[2][2].state).toBe("none");
       expect(board.grid[3]).toBe(undefined);
     });
   });
@@ -26,9 +26,9 @@ describe("Board", function() {
     });
 
     it("marks the grid", function() {
-      expect(board.grid[0][0]).toBe("ship");
-      expect(board.grid[1][0]).toBe("ship");
-      expect(board.grid[2][0]).toBe("ship");
+      expect(board.grid[0][0].ship).toBe("ship");
+      expect(board.grid[1][0].ship).toBe("ship");
+      expect(board.grid[2][0].ship).toBe("ship");
     });
 
     // TODO: No placement off the board
@@ -45,15 +45,15 @@ describe("Board", function() {
     });
 
     it("mutates the state of the board on hits", function() {
-      expect(board.grid[0][0]).toBe("ship");
+      expect(board.grid[0][0].state).toBe("none");
       board.shoot(0,0);
-      expect(board.grid[0][0]).toBe("hit");
+      expect(board.grid[0][0].state).toBe("hit");
     });
 
     it("mutates the state of the board on misses", function() {
-      expect(board.grid[2][2]).toBe("empty");
+      expect(board.grid[2][2].state).toBe("none");
       board.shoot(2,2);
-      expect(board.grid[2][2]).toBe("miss");
+      expect(board.grid[2][2].state).toBe("miss");
     });
   });
 
