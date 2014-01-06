@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "grunt spec:unit"
+    "test": "grunt spec:unit",
+    "test-all": "grunt spec:all"
   },
   "dependencies": {
     "express": "3.4.7",
