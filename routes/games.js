@@ -27,7 +27,8 @@ exports.show = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  var game = new Game;
+  var game = new Game();
+  game.placeAiShip();
   games.push(game); //TODO: kill
   // GameManager.save(game);
   res.send(game);

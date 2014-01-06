@@ -59,7 +59,6 @@ function updateGame() {
         expect(data.trackingGrid.length).toBe(3);
         data.trackingGrid.forEach(function(row) {
           expect(row.length).toBe(3);
-          expect(row).toContain({ state: 'none' });
           expect(row).not.toContain({ state: 'hit' });
           expect(row).not.toContain({ state: 'miss' });
         });
