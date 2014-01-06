@@ -17,11 +17,11 @@ describe("GameManager", function() {
       });
     });
 
-    it("returns the game", function() {
-      expect(result).not.toBe.null;
+    it("returns an array of inserted rows", function() {
+      expect(result.length).toBe(1);
     });
     it("generates an id", function() {
-      expect(result._id).not.toBe.null;
+      expect(result[0]._id).toBeDefined;
     });
   });
 });
