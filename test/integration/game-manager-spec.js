@@ -23,5 +23,14 @@ describe("GameManager", function() {
     it("generates an id", function() {
       expect(result[0]._id).toBeDefined;
     });
+
+    describe("findBySlug", function() {
+      it("returns a single game object", function() {
+        GameManager.findBySlug(game.slug)
+          .then(function(queryResult) {
+            expect(queryResult.slug).toBe(game.slug);
+        });
+      });
+    });
   });
 });
