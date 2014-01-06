@@ -98,11 +98,9 @@ function postShot() {
       .expectJSONTypes({
         x: Number,
         y: Number,
-        hit: Boolean,
-        sunk: String
+        hit: String
       })
       .afterJSON(function(data) {
-        expect(data.sunk).toMatch(/none sunk|carrier|battleship|destroyer|patrol boat/);
       })
   .toss();
 }

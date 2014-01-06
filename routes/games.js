@@ -9,6 +9,9 @@ function findGame(id) {
   })[0];
 }
 
+exports.games = games;
+exports.findGame = findGame;
+
 exports.list = function(req, res){
   res.send(games);
 };
