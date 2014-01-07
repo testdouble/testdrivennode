@@ -7,7 +7,7 @@ describe("GameManager", function() {
     game = new Game();
   });
 
-  describe("saveGame" , function() {
+  describe("saveGame", function() {
     var result;
     beforeEach(function(done) {
       GameManager.saveGame(game)
@@ -20,8 +20,19 @@ describe("GameManager", function() {
     it("returns an array of inserted rows", function() {
       expect(result.length).toBe(1);
     });
-    it("generates an id", function() {
-      expect(result[0]._id).toBeDefined;
+
+    describe("findById", function() {
+      beforeEach(function(done) {
+        GameManager.findById(game.id)
+        .then(function(game) {
+          result = game;
+          done();
+        });
+      });
+
+      it("should retrieve the saved game", function(done) {
+        expect(result.id).toBe(game.id);
+      });
     });
   });
 });

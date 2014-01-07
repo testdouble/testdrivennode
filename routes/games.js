@@ -1,5 +1,4 @@
 var Game = require('../lib/game');
-// Fake it til you make it
 
 var games = [new Game()];
 

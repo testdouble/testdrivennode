@@ -15,8 +15,8 @@ describe("Game", function() {
     expect(game.trackingGrid).toBeDefined();
   });
 
-  it("has a unique slug", function(){
-    expect(game.slug).not.toBe(new Game().slug);
+  it("has a unique id", function(){
+    expect(game.id).not.toBe(new Game().id);
   });
 });
 
