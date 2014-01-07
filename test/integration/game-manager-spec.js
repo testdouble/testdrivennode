@@ -22,16 +22,11 @@ describe("GameManager", function() {
     });
 
     describe("findById", function() {
-      beforeEach(function(done) {
+      it("returns a single game object", function() {
         GameManager.findById(game.id)
-        .then(function(game) {
-          result = game;
-          done();
+          .then(function(queryResult) {
+            expect(queryResult.id).toBe(game.id);
         });
-      });
-
-      it("should retrieve the saved game", function(done) {
-        expect(result.id).toBe(game.id);
       });
     });
   });

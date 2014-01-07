@@ -59,7 +59,6 @@ function updateGame() {
         expect(data.trackingGrid.length).toBe(3);
         data.trackingGrid.forEach(function(row) {
           expect(row.length).toBe(3);
-          expect(row).toContain({ state: 'none' });
           expect(row).not.toContain({ state: 'hit' });
           expect(row).not.toContain({ state: 'miss' });
         });
@@ -98,11 +97,9 @@ function postShot() {
       .expectJSONTypes({
         x: Number,
         y: Number,
-        hit: Boolean,
-        sunk: String
+        hit: String
       })
       .afterJSON(function(data) {
-        expect(data.sunk).toMatch(/none sunk|carrier|battleship|destroyer|patrol boat/);
       })
   .toss();
 }
