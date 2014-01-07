@@ -53,3 +53,8 @@
   sunk: ["none sunk" | [shipType]]
 }
 ```
+
+
+### Frontend
+
+The frontend JavaScript, HTML, and CSS located in `/public` are generated. Visit [this repo](https://github.com/testdouble/testdrivennode-frontend) to make changes.
