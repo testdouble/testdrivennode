@@ -38,7 +38,7 @@ exports.update = function(req, res, next){
   var game = findGame(req.params.id); //TODO: kill
   // GameManager.findByID(req.params.id).then(function(result){});
   if (game) {
-    game.primaryGrid = req.body.primaryGrid;
+    game.setPrimaryGrid(req.body.primaryGrid);
     game.status = "inprogress";
     game.turn = "yours";
     res.send(game);

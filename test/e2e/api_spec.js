@@ -89,11 +89,11 @@ function getGameStateDuringPlay() {
 
 function postShot() {
   frisby.create('Fire a shot via POST /games/:id/shots')
-    .post(gameURI() + '/shots', { x: 0, y: 1 }, { json: true })
+    .post(gameURI() + '/shots', { x: 0, y: 0 }, { json: true })
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
       // .inspectJSON()
-      .expectJSON({ x: 0, y: 1 })
+      .expectJSON({ x: 0, y: 0 })
       .expectJSONTypes({
         x: Number,
         y: Number,
