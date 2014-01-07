@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title>battleship-frontend</title>
+    <link rel="stylesheet" type="text/css" href="/css/app.css" media="all" />
+  </head>
+  <body>
+    <div class="row">
+      <div class="small-12 columns">
+
+        <h1>Battleship</h1>
+
+        <div class="row">
+          <div class="small-8 columns">
+
+            <div class="row" ng-controller="trackingGridCtrl" ng-show="game.trackingGrid">
+              <div class="columns small-10 small-centered">
+                <h4>Tracking Grid</h4>
+
+                <table class="board">
+                  <thead>
+                    <th> </th>
+                    <th ng-repeat="cell in game.trackingGrid[0] track by $index">{{ $index | columnHeader }}</th>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="row in game.trackingGrid track by $index">
+                      <td><strong>{{ $index + 1 }}</strong></td>
+                      <td ng-repeat="cell in row" ng-click="fire(cell)" class="{{ cell.state }}">
+                        {{ cell.state | cellDisplay }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+
+
+            <div class="row" ng-controller="primaryGridCtrl">
+              <div class="columns small-10 small-centered">
+
+                <h4>Primary Grid</h4>
+
+                <table class="board">
+                  <thead>
+                    <th> </th>
+                    <th ng-repeat="cell in game.primaryGrid[0] track by $index">{{ $index | columnHeader }}</th>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="row in game.primaryGrid track by $index">
+                      <td><strong>{{ $index + 1 }}</strong></td>
+                      <td ng-repeat="cell in row" ng-click="place(cell)" class="{{ cell | cellClass }}">
+                        {{ cell.state | cellDisplay }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="small-4 columns">
+            <div class="row"ng-controller="GameCtrl">
+              <div class="columns small-10 small-centered">
+                <div class="panel radius">
+                  <h4>Status</h4>
+
+                  <strong>Game: </strong>{{ game.status }}<br />
+                  <strong>Turn: </strong>{{ game.turn }}<br />
+                  <strong>Prompt: </strong> {{ gameStatus.prompt() }}
+                </div>
+              </div>
+            </div>
+
+              <div class="row" ng-controller="shipsCtrl">
+                <div class="columns small-10 small-centered">
+                  <h4>Ships</h4>
+
+                  <table class="board">
+                    <thead>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </thead>
+                    <tbody>
+                      <tr ng-click="handleShip(ship)" ng-repeat="ship in ships">
+                        <td>{{ ship.name }}</td>
+                        <td class="{{docked(ship)}}" ng-repeat="point in ship.hull track by $index">{{ point }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="row" ng-controller="startCtrl" ng-show="gameStatus.isReady()">
+                <div class="columns small-10 small-centered">
+                  <br />
+                  <button class="start-btn" ng-click="gameStatus.start()">Start</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="/js/app.js"></script>
+  </body>
+</html>
