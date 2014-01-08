@@ -15,7 +15,7 @@
 
             <div class="row" ng-controller="trackingGridCtrl" ng-show="game.trackingGrid">
               <div class="columns small-10 small-centered">
-                <h4>Tracking Grid</h4>
+                <h4>Opponent's Board</h4>
 
                 <table class="board">
                   <thead>
@@ -33,13 +33,13 @@
                 </table>
 
               </div>
-            </div>
+            </div><br />
 
 
             <div class="row" ng-controller="primaryGridCtrl">
               <div class="columns small-10 small-centered">
 
-                <h4>Primary Grid</h4>
+                <h4>Your Board</h4>
 
                 <table class="board">
                   <thead>
@@ -66,9 +66,11 @@
                 <div class="panel radius">
                   <h4>Status</h4>
 
-                  <strong>Game: </strong>{{ game.status }}<br />
-                  <strong>Turn: </strong>{{ game.turn }}<br />
-                  <strong>Prompt: </strong> {{ gameStatus.prompt() }}
+                  <ul class="no-bullet">
+                    <li><strong>Game: </strong><span class="game-status">{{ game.status }}</span></li>
+                    <li><strong>Turn: </strong>{{ game.turn }}</li>
+                    <li><strong>Prompt: </strong> {{ gameStatus.prompt() }}</li>
+                  </ul>
                 </div>
               </div>
             </div>
