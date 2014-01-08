@@ -30,8 +30,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// app.get('/', routes.index);
-app.get('/games', games.list);
+// app.get('/games', games.list);
 app.post('/games', games.create);
 app.put('/games/:id', games.update);
 app.get('/games/:id', games.show);

@@ -45,13 +45,11 @@ function updateGame() {
       .expectHeaderContains('content-type', 'application/json')
       .expectJSON({
         status: "inprogress",
-        turn: "yours",
         id: gameId
       })
       // .inspectJSON()
       .expectJSONTypes({
         status: String,
-        turn: String,
         trackingGrid: Array,
         primaryGrid: Array
       })
@@ -77,7 +75,6 @@ function getGameStateDuringPlay() {
       .expectJSON({ id: gameId })
       .expectJSONTypes({
         status: String,
-        turn: String,
         trackingGrid: Array,
         primaryGrid: Array
       })

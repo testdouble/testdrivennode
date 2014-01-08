@@ -1,48 +1,37 @@
 var Game = require('../lib/game');
 var GameManager = require('../lib/game-manager');
 
-// TODO: Kill these in favor of GameManager
-var games = []
-function findGame(id) {
-  return games.filter(function (game) {
-    return game.id === id;
-  })[0];
-}
-
-exports.games = games;
-exports.findGame = findGame;
-
-exports.list = function(req, res){
-  res.send(games);
-};
-
 exports.show = function(req, res, next){
-  var game = findGame(req.params.id); //TODO: kill
-  // GameManager.findByID(req.params.id).then(function(result){});
-  if (game) {
+  GameManager.findById(req.params.id)
+  .then(function(game) {
     res.send(game);
-  } else {
-    res.status(404).send("Game not found");
-  }
+  })
+  .fail(function(err) {
+    res.status(400).send("Unable to show game: " + err);
+  });
 };
 
 exports.create = function(req, res, next){
   var game = new Game();
   game.placeAiShip();
-  games.push(game); //TODO: kill
-  // GameManager.save(game);
-  res.send(game);
+  GameManager.saveGame(game)
+  .then(function(games) {
+    res.send(games[0]);
+  });
 };
 
 exports.update = function(req, res, next){
-  var game = findGame(req.params.id); //TODO: kill
-  // GameManager.findByID(req.params.id).then(function(result){});
-  if (game) {
+  GameManager.findById(req.params.id)
+  .then(function(game){
     game.setPrimaryGrid(req.body.primaryGrid);
     game.status = "inprogress";
     game.turn = "yours";
-    res.send(game);
-  } else {
-    res.status(404).send("Game not found");
-  }
+    GameManager.saveGame(game)
+    .then(function(games) {
+      res.send(games[0]);
+    });
+  })
+  .fail(function(err) {
+    res.status(400).send("Unable to update game: " + err);
+  });
 };
