@@ -4,6 +4,7 @@ var GameManager = require('../lib/game-manager');
 exports.show = function(req, res, next){
   GameManager.findById(req.params.id)
   .then(function(game) {
+    console.log(game.primaryGrid);
     res.send(game);
   })
   .fail(function(err) {
