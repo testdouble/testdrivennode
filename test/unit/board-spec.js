@@ -57,4 +57,19 @@ describe("Board", function() {
     });
   });
 
+  describe("shipIsSunk", function() {
+    beforeEach(function() {
+      board.place3SpotShip(0,0, 'horizontal');
+    });
+
+    it("is sunk with three hits", function() {
+      expect(board.shipIsSunk()).toBe.false;
+      board.shoot(0,0);
+      expect(board.shipIsSunk()).toBe.false;
+      board.shoot(0,1);
+      expect(board.shipIsSunk()).toBe.false;
+      board.shoot(0,2);
+      expect(board.shipIsSunk()).toBe.true;
+    });
+  });
 });
