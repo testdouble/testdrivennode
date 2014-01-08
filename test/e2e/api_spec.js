@@ -29,38 +29,25 @@ function createGame() {
       })
       .afterJSON(function(data) {
         gameId = data.id;
-        updateGame()
+        placeShip()
       })
   .toss();
 }
 
-function updateGame() {
+function placeShip() {
   frisby.create('Setup ends when a user updates game with PUT')
-    .put(gameURI(), {
-      id: gameId,
-      status: "setup",
-      primaryGrid: fakeGrid
+    .post(gameURI() + "/ships", {
+      x: 0,
+      y: 0,
+      orientation: "horizontal"
     }, { json: true })
       .expectStatus(200)
       .expectHeaderContains('content-type', 'application/json')
       .expectJSON({
-        status: "inprogress",
-        id: gameId
+        status: "OK"
       })
-      // .inspectJSON()
-      .expectJSONTypes({
-        status: String,
-        trackingGrid: Array,
-        primaryGrid: Array
-      })
+      .inspectJSON()
       .afterJSON(function(data) {
-        expect(data.trackingGrid.length).toBe(3);
-        data.trackingGrid.forEach(function(row) {
-          expect(row.length).toBe(3);
-          expect(row).not.toContain({ state: 'hit' });
-          expect(row).not.toContain({ state: 'miss' });
-        });
-        expect(data.primaryGrid).toEqual(fakeGrid);
         getGameStateDuringPlay()
       })
   .toss();
