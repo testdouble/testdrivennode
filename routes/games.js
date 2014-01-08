@@ -14,7 +14,7 @@ exports.show = function(req, res, next){
 
 exports.create = function(req, res, next){
   var game = new Game();
-  GameManager.saveGame(game)
+  GameManager.createGame(game)
   .then(function(games) {
     res.send(games[0]);
   });
@@ -26,7 +26,7 @@ exports.update = function(req, res, next){
     game.setPrimaryGrid(req.body.primaryGrid);
     game.status = "inprogress";
     game.turn = "yours";
-    GameManager.saveGame(game)
+    GameManager.updateGame(game)
     .then(function(games) {
       res.send(games[0]);
     });

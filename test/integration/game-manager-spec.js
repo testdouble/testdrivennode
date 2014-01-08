@@ -7,10 +7,10 @@ describe("GameManager", function() {
     game = new Game();
   });
 
-  describe("saveGame", function() {
+  describe("createGame", function() {
     var result;
     beforeEach(function(done) {
-      GameManager.saveGame(game)
+      GameManager.createGame(game)
       .then(function(insertedGame) {
         result = insertedGame;
         done();
