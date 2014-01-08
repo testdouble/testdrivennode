@@ -13,7 +13,6 @@ exports.show = function(req, res, next){
 
 exports.create = function(req, res, next){
   var game = new Game();
-  game.placeAiShip();
   GameManager.saveGame(game)
   .then(function(games) {
     res.send(games[0]);

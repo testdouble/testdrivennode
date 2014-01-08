@@ -7,6 +7,7 @@ var express = require('express');
 var routes = require('./routes');
 var games = require('./routes/games');
 var shots = require('./routes/shots');
+var ships = require('./routes/ships');
 var http = require('http');
 var path = require('path');
 
@@ -36,6 +37,8 @@ app.put('/games/:id', games.update);
 app.get('/games/:id', games.show);
 
 app.post('/games/:id/shots', shots.create);
+
+app.post('/games/:id/ships', ships.create);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
